@@ -1,2 +1,5 @@
 pref("enable", true);
-pref("input", "This is input");
+pref("provider", "gemini");
+pref("apiKey", "");
+pref("model", "gemini-2.5-flash");
+pref("baseUrl", "http://localhost:11434");

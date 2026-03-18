@@ -32,6 +32,12 @@ async function startup({ id, version, resourceURI, rootURI }, reason) {
     ctx,
   );
   await Zotero.__addonInstance__.hooks.onStartup();
+
+  Zotero.PreferencePanes.register({
+    pluginID: "__addonID__",
+    src: rootURI + "content/preferences.xhtml",
+    image: rootURI + "content/icons/favicon.png"
+  });
 }
 
 async function onMainWindowLoad({ window }, reason) {
