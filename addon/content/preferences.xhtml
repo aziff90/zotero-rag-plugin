@@ -1,25 +1,53 @@
 <linkset>
   <html:link rel="localization" href="__addonRef__-preferences.ftl" />
 </linkset>
-<groupbox onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window })">
+<groupbox
+  onload="Zotero.__addonInstance__.hooks.onPrefsEvent('load', { window })"
+>
   <label><html:h2>RAG Assistant Settings</html:h2></label>
-  
-  <vbox style="margin-top: 10px;">
-    <html:label style="font-weight: bold; margin-bottom: 5px;">LLM Provider</html:label>
-    <html:select preference="provider" style="padding: 5px; margin-bottom: 15px; width: 300px;">
-       <html:option value="gemini">Google Gemini</html:option>
-       <html:option value="openai">OpenAI (ChatGPT)</html:option>
-       <html:option value="anthropic">Anthropic (Claude)</html:option>
-       <html:option value="ollama">Ollama (Local)</html:option>
+
+  <vbox style="margin-top: 10px">
+    <html:label style="font-weight: bold; margin-bottom: 5px"
+      >LLM Provider</html:label
+    >
+    <html:select
+      preference="provider"
+      style="padding: 5px; margin-bottom: 15px; width: 300px"
+    >
+      <html:option value="gemini">Google Gemini</html:option>
+      <html:option value="openai">OpenAI (ChatGPT)</html:option>
+      <html:option value="anthropic">Anthropic (Claude)</html:option>
+      <html:option value="ollama">Ollama (Local)</html:option>
     </html:select>
 
-    <html:label style="font-weight: bold; margin-bottom: 5px;">API Key</html:label>
-    <html:input type="password" preference="apiKey" placeholder="sk-..." style="padding: 5px; margin-bottom: 15px; width: 300px;" />
+    <html:label style="font-weight: bold; margin-bottom: 5px"
+      >API Key</html:label
+    >
+    <html:input
+      type="password"
+      preference="apiKey"
+      placeholder="sk-..."
+      style="padding: 5px; margin-bottom: 15px; width: 300px"
+    />
 
-    <html:label style="font-weight: bold; margin-bottom: 5px;">Model Name</html:label>
-    <html:input type="text" preference="model" placeholder="gemini-2.5-flash" style="padding: 5px; margin-bottom: 15px; width: 300px;" />
+    <html:label style="font-weight: bold; margin-bottom: 5px"
+      >Model Name</html:label
+    >
+    <html:input
+      type="text"
+      preference="model"
+      placeholder="gemini-2.5-flash"
+      style="padding: 5px; margin-bottom: 15px; width: 300px"
+    />
 
-    <html:label style="font-weight: bold; margin-bottom: 5px;">Ollama Base URL (Local inference only)</html:label>
-    <html:input type="text" preference="baseUrl" placeholder="http://localhost:11434" style="padding: 5px; margin-bottom: 15px; width: 300px;" />
+    <html:label style="font-weight: bold; margin-bottom: 5px"
+      >Ollama Base URL (Local inference only)</html:label
+    >
+    <html:input
+      type="text"
+      preference="baseUrl"
+      placeholder="http://localhost:11434"
+      style="padding: 5px; margin-bottom: 15px; width: 300px"
+    />
   </vbox>
 </groupbox>

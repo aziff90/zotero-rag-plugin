@@ -36,7 +36,7 @@ async function startup({ id, version, resourceURI, rootURI }, reason) {
   Zotero.PreferencePanes.register({
     pluginID: "__addonID__",
     src: rootURI + "content/preferences.xhtml",
-    image: rootURI + "content/icons/favicon.png"
+    image: rootURI + "content/icons/favicon.png",
   });
 }
 

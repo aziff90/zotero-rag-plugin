@@ -13,7 +13,7 @@ export interface Chunk {
 export function chunkText(
   documents: { itemId: number; itemKey: string; title: string; text: string }[],
   chunkSize: number = 1000,
-  overlap: number = 200
+  overlap: number = 200,
 ): Chunk[] {
   const chunks: Chunk[] = [];
 
@@ -25,7 +25,7 @@ export function chunkText(
     // Very simple character-based chunking
     while (startIndex < text.length) {
       let endIndex = startIndex + chunkSize;
-      
+
       // If we're not at the very end, try to find a nice break point (space or newline)
       if (endIndex < text.length) {
         const breakSearch = text.lastIndexOf(" ", endIndex);
@@ -37,7 +37,7 @@ export function chunkText(
       }
 
       const chunkText = text.slice(startIndex, endIndex).trim();
-      
+
       if (chunkText.length > 0) {
         chunks.push({
           id: `${doc.itemId}-chunk-${chunkIndex}`,
@@ -45,14 +45,18 @@ export function chunkText(
           itemKey: doc.itemKey,
           title: doc.title,
           text: chunkText,
-          chunkIndex: chunkIndex
+          chunkIndex: chunkIndex,
         });
         chunkIndex++;
       }
 
       // Move startIndex forward by chunkSize MINUS overlap
       startIndex = endIndex - overlap;
-      if (startIndex >= text.length || startIndex < 0 || endIndex === text.length) {
+      if (
+        startIndex >= text.length ||
+        startIndex < 0 ||
+        endIndex === text.length
+      ) {
         break; // Ensure we don't loop infinitely or redundantly
       }
     }

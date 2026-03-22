@@ -9,12 +9,12 @@ export class UIManager {
         const items = ztoolkit.getGlobal("ZoteroPane").getSelectedItems();
         const itemIds = items.map((i: any) => i.id);
         const mainWindow = ztoolkit.getGlobal("Zotero").getMainWindow();
-        
+
         mainWindow.openDialog(
-          `chrome://${addon.data.config.addonRef}/content/chat.html`, 
-          "ZoteroRAGChat", 
-          "chrome,titlebar,toolbar,centerscreen,resizable,scrollbars=yes,width=600,height=800", 
-          { itemIds: itemIds }
+          `chrome://${addon.data.config.addonRef}/content/chat.html`,
+          "ZoteroRAGChat",
+          "chrome,titlebar,toolbar,centerscreen,resizable,scrollbars=yes,width=600,height=800",
+          { itemIds: itemIds },
         );
       },
       icon: menuIcon,
