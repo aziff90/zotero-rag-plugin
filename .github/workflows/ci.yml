@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Setup JS
         uses: zotero-plugin-dev/workflows/setup-js@main
@@ -23,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GitHub_TOKEN }}
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Setup JS
         uses: zotero-plugin-dev/workflows/setup-js@main
@@ -38,6 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - build
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Setup JS
         uses: zotero-plugin-dev/workflows/setup-js@main
