@@ -11,9 +11,10 @@
   },
   "applications": {
     "zotero": {
-      "id": "zoterorag@example.com",
-      "strict_min_version": "7.0"
+      "id": "__addonID__",
+      "update_url": "__updateURL__",
+      "strict_min_version": "6.999",
+      "strict_max_version": "8.*"
     }
-  },
-  "background": { }
+  }
 }
