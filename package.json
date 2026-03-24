@@ -1,7 +1,7 @@
 {
   "name": "zotero-rag-plugin",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zotero RAG Plugin with NotebookLM-like experience",
   "config": {
     "addonName": "Zotero RAG Plugin",
