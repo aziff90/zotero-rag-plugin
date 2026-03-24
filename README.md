@@ -42,4 +42,6 @@ You can customise the RAG Assistant globally by configuring the LLM Backend:
 3. Paste in your **API Key**.
 4. Optional: Specify the precise **Model Name** you want to use (e.g., `gemini-2.5-flash`, `gpt-4o`, `claude-3-haiku-20240307`, or `llama3`).
 
-_Note: The very first time you generate embeddings, the semantic search model (`all-MiniLM-L6-v2`) will be downloaded locally, measuring around 22MB. You will see a progress bar indicating the status._ 5. Wait for the vectors to initialise, and start asking questions about your sources!
+_Note: The very first time you generate embeddings, the semantic search model (`all-MiniLM-L6-v2`) will be downloaded locally, measuring around 22MB. You will see a progress bar indicating the status._
+
+5. Wait for the vectors to initialise, and start asking questions about your sources!
