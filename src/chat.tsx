@@ -50,7 +50,7 @@ const ChatApp = () => {
         const extracted = await extractTextFromItems(items);
 
         setStatus("Chunking text...");
-        const chunks = chunkText(extracted, 1000, 200);
+        const chunks = chunkText(extracted, 300, 50);
 
         setStatus(`Generating embeddings for ${chunks.length} chunks...`);
         setProgress(1); // Show progress bar
@@ -86,14 +86,15 @@ const ChatApp = () => {
     if (!input.trim() || !isReady) return;
 
     const currentProvider =
-      (Zotero.Prefs.get("extensions.zoterorag.provider") as any) || "gemini";
+      (Zotero.Prefs.get("extensions.zotero.zoterorag.provider") as any) ||
+      "gemini";
     const currentApiKey =
-      (Zotero.Prefs.get("extensions.zoterorag.apiKey") as string) || "";
+      (Zotero.Prefs.get("extensions.zotero.zoterorag.apiKey") as string) || "";
     const currentModel =
-      (Zotero.Prefs.get("extensions.zoterorag.model") as string) ||
+      (Zotero.Prefs.get("extensions.zotero.zoterorag.model") as string) ||
       "gemini-2.5-flash";
     const currentBaseUrl =
-      (Zotero.Prefs.get("extensions.zoterorag.baseUrl") as string) ||
+      (Zotero.Prefs.get("extensions.zotero.zoterorag.baseUrl") as string) ||
       "http://localhost:11434";
 
     if (currentProvider !== "ollama" && !currentApiKey) {
@@ -125,7 +126,7 @@ const ChatApp = () => {
     ]);
 
     try {
-      const results = await vectorStoreRef.current.search(userMessage, 10);
+      const results = await vectorStoreRef.current.search(userMessage, 15);
 
       // Group results by document key so context is cleaner
       const docGroups: Record<

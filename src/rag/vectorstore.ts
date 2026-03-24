@@ -49,7 +49,7 @@ export class VectorStore {
 
   async search(
     query: string,
-    topK: number = 3,
+    topK: number = 5,
   ): Promise<{ chunk: Chunk; score: number }[]> {
     if (this.chunks.length === 0) return [];
 
@@ -60,7 +60,7 @@ export class VectorStore {
     });
     const queryVector = Array.from(output.data) as number[];
 
-    // Compute cosine similarity (dot product on normalized vectors)
+    // 1. Compute cosine similarity (dot product on normalized vectors)
     const similarities = this.embeddings.map((vec, idx) => {
       let dot = 0;
       for (let i = 0; i < vec.length; i++) {
@@ -69,11 +69,43 @@ export class VectorStore {
       return { idx, score: dot };
     });
 
+    // 2. Fetch top 30 via semantic search to cast a wide net
     similarities.sort((a, b) => b.score - a.score);
+    const topCandidates = similarities.slice(0, 30);
 
-    return similarities.slice(0, topK).map((s) => ({
-      chunk: this.chunks[s.idx],
-      score: s.score,
-    }));
+    // 3. Simulated Cross-Encoder Re-Ranking using BM25 Lexical Scoring
+    // We re-score the top 30 semantic chunks using exact keyword density
+    const queryTerms = query
+      .toLowerCase()
+      .split(/\W+/)
+      .filter((t) => t.length > 2);
+
+    const reranked = topCandidates.map((candidate) => {
+      const text = this.chunks[candidate.idx].text.toLowerCase();
+      let lexicalScore = 0;
+
+      queryTerms.forEach((term) => {
+        const regex = new RegExp(`\\b${term}\\b`, "g");
+        const matches = text.match(regex);
+        if (matches) {
+          const termFrequency = matches.length;
+          // Basic BM25-like Term Frequency saturation
+          lexicalScore += (termFrequency * 2.5) / (termFrequency + 1.5);
+        }
+      });
+
+      // Normalize semantic score (typically 0.4 to 1.0) and multiply/add lexical weight
+      const finalScore =
+        candidate.score * 0.6 + (lexicalScore > 0 ? lexicalScore * 0.05 : 0);
+      return {
+        chunk: this.chunks[candidate.idx],
+        score: finalScore,
+      };
+    });
+
+    // Sort by the new Hybrid Score
+    reranked.sort((a, b) => b.score - a.score);
+
+    return reranked.slice(0, topK);
   }
 }
