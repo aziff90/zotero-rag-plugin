@@ -6,6 +6,7 @@ import { chunkText } from "./rag/chunker";
 import { VectorStore } from "./rag/vectorstore";
 import { LLMClient } from "./rag/llm";
 import ReactMarkdown from "react-markdown";
+import { getPref } from "./utils/prefs";
 
 const ztoolkit = new BasicTool();
 // @ts-expect-error type override
@@ -85,17 +86,11 @@ const ChatApp = () => {
   const handleSend = async () => {
     if (!input.trim() || !isReady) return;
 
-    const currentProvider =
-      (Zotero.Prefs.get("extensions.zotero.zoterorag.provider") as any) ||
-      "gemini";
-    const currentApiKey =
-      (Zotero.Prefs.get("extensions.zotero.zoterorag.apiKey") as string) || "";
-    const currentModel =
-      (Zotero.Prefs.get("extensions.zotero.zoterorag.model") as string) ||
-      "gemini-2.5-flash";
+    const currentProvider = (getPref("provider") as any) || "gemini";
+    const currentApiKey = (getPref("apiKey") as string) || "";
+    const currentModel = (getPref("model") as string) || "gemini-2.5-flash";
     const currentBaseUrl =
-      (Zotero.Prefs.get("extensions.zotero.zoterorag.baseUrl") as string) ||
-      "http://localhost:11434";
+      (getPref("baseUrl") as string) || "http://localhost:11434";
 
     if (currentProvider !== "ollama" && !currentApiKey) {
       setMessages((prev) => [
