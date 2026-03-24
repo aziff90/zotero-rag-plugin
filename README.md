@@ -1,5 +1,9 @@
 # Zotero RAG Chat Plugin
 
+**[ 📖 Readme ](README.md) | [ 🚀 Latest Updates / Changelog ](CHANGELOG.md) | [ ⚖️ License ](LICENSE)**
+
+---
+
 ## Overview
 
 This plugin is a NotebookLM-style RAG architecture for Zotero 7. It seamlessly integrates into your research workflow by allowing you to extract text from your selected PDFs/items, chunk the text, create embeddings entirely offline using local AI models (`Xenova/all-MiniLM-L6-v2`), and query the Gemini API to answer your questions strictly based on the provided context sources.
